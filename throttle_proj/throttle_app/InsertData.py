@@ -16,6 +16,7 @@ class InsertThrottleData(object):
 
         print("Connecting to database...")
 
+
     def insertuserdata(self):
 
         db1 = Database()

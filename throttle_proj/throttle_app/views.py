@@ -6,6 +6,7 @@ from throttle_app.models import User
 from throttle_app.models import ActivityPeriod
 from throttle_app.Database import Database
 from throttle_app.InsertData import InsertThrottleData
+from throttle_app.DisplayData import DisplayThrottleData
 from rest_framework.parsers import JSONParser
 import json
 from throttle_app import models
@@ -27,6 +28,17 @@ def Throttledataposts(request):
 
         ob1 = InsertThrottleData(case)
         res1 = ob1.insertuserdata()
+        ##totaldata = ob1.insertactivitydata()
+
+    return HttpResponse(res1)
+
+@api_view(['GET'])
+@parser_classes([JSONParser])
+def ThrottledataGets(request):
+
+    ob1 = DisplayThrottleData()
+    print(ob1)
+    res1 = ob1.displaydata()
         ##totaldata = ob1.insertactivitydata()
 
     return HttpResponse(res1)

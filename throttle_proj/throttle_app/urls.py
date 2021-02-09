@@ -5,5 +5,5 @@ from throttle_app import views
 urlpatterns = [
     ##path('admin/', admin.site.urls),
     path('posts',views.Throttledataposts),
-
+    path('gets',views.ThrottledataGets)
 ]

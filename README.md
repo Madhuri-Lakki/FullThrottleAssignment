@@ -61,7 +61,7 @@ print(response.text)
     None
 
 
-### How to server data - GET @ `sample/gets`
+### How to serve data - GET @ `sample/gets`
 
 
 ```python

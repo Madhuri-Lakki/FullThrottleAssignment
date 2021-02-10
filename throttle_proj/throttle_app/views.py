@@ -39,7 +39,6 @@ def ThrottledataGets(request):
     ob1 = DisplayThrottleData()
     print(ob1)
     res1 = ob1.displaydata()
-        ##totaldata = ob1.insertactivitydata()
 
     return HttpResponse(res1)
 

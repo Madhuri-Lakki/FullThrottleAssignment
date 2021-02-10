@@ -1,6 +1,7 @@
 from throttle_app.Database import Database
 import json
 from pandas import DataFrame
+import pandas as pd
 
 
 class DisplayThrottleData(object):
@@ -30,10 +31,18 @@ class DisplayThrottleData(object):
             'end_time':list,
         })
 
-        sessions = {}
+        sessions = []
         for id,row in result2.iterrows():
             a,b = row['start_time'],row['end_time']
-            sessions[id] = list(zip(a,b))
+            records = list(zip(a,b))
+            records = [{'start_time':s,'end_time':e} for s,e in records]
+            sessions.append((id,records)) 
 
-        print(sessions)
-        return None
+
+        session = DataFrame(sessions,columns=['id','activity_periods'])
+        out = pd.merge(result1,session)
+        out = out.to_dict(orient='records')
+
+        container = {"ok":"true","members":out}
+
+        return json.dumps(container)

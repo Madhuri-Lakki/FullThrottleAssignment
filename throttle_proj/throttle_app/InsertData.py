@@ -18,24 +18,20 @@ class InsertThrottleData(object):
 
 
     def insertuserdata(self):
-
         db1 = Database()
         conn = db1.getConnection()
         cursor = conn.cursor()
+        # query = cursor.execute("select * from User where id = %s",(self.id))
+        query = cursor.execute('select * from User where id = \'%s\'' %self.id )
+        query = cursor.fetchall()
+        print('LSKDJFSLKDFJ', query)
+        if query is None:
+            Result = cursor.execute("insert into User(id,real_name,tz) values(%s,%s,%s)",(self.id,self.real_name,self.tz))
+            conn.commit()
 
-        Result = cursor.execute("insert into User(id,real_name,tz) values(%s,%s,%s)",(self.id,self.real_name,self.tz))
-
-        conn.commit()
         for i in self.activity_periods:
-
             start_time = i['start_time']
-            
             end_time = i['end_time']
             Result2 = cursor.execute("insert into ActivityPeriod(id,start_time,end_time) values(%s,%s,%s)",(self.id,start_time,end_time))
             conn.commit()
         print("query got executed...")
-
-        
-
-
-
